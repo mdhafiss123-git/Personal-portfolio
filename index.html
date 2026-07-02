@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi I'm</title>
+    <title>Mohamed Hafis - Web Developer & UI/UX Designer</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- ============================================================
+         TYPOGRAPHY + HERO BRANDING REFRESH
+         - Headings: Sora (section titles, card headings) / Space
+           Grotesk (display moments: hero name, philosophy quote,
+           studio headings) — both already imported above.
+         - Body copy: Inter, unchanged.
+         - Hero name gets a vibrant multicolor gradient so "Mohamed
+           Hafis" reads as the primary anchor instead of the generic
+           role line.
+         - Availability list gets 4 custom inline SVG icons in place
+           of default bullets, reusing the existing icon sprite plus
+           one new "design" mark for UI/UX so each item is visually
+           distinct.
+         All rules below are additive / override-only and do not
+         remove any existing classes, so existing JS hooks (slider
+         ids, form ids) are untouched.
+         ============================================================ -->
+    <style>
+        :root {
+            --grad-vibrant: linear-gradient(120deg, #667eea 0%, #764ba2 45%, #f093fb 100%);
+        }
+
+        /* ---------- Hero name branding ---------- */
+        .hero-name-gradient {
+            display: block;
+            font-family: 'Space Grotesk', 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: clamp(2.6rem, 6vw, 4.6rem);
+            line-height: 1.05;
+            letter-spacing: -0.01em;
+            background: var(--grad-vibrant);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 0.35rem;
+        }
+
+        .hero-role-line {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+            letter-spacing: 0.01em;
+            opacity: 0.82;
+        }
+
+        /* ---------- Global heading typography ---------- */
+        h1, h2, h3, h4,
+        .hero-title-modern,
+        .section-title,
+        .philosophy-quote,
+        .studio-title-display,
+        .studio-heading-display,
+        .tech-stack-title,
+        .contact-header h2,
+        .contact-form-box h3,
+        .contact-info-box h3,
+        .skills-panel-label,
+        .about-layout h2,
+        .expertise-card h3,
+        .service-card h3,
+        .project-row-content h3,
+        .journey-content h4,
+        .benefit-text h4,
+        .footer-section h3,
+        .footer-section h4 {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        /* Display-level moments get the more geometric Space Grotesk */
+        .philosophy-quote,
+        .studio-title-display,
+        .studio-heading-display,
+        .tech-stack-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Body copy stays on Inter everywhere */
+        p, li, a, span, label, input, textarea, button,
+        .hero-description,
+        .about-lead,
+        .section-subtitle,
+        .testimonial-text,
+        .tag,
+        .tech-item {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Monospace accent line keeps its coded feel */
+        .tech-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ---------- Availability list — custom SVG icon markers ---------- */
+        .availability-list {
+            list-style: none;
+            margin: 0.65rem 0 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .availability-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.96rem;
+        }
+
+        .availability-list li svg {
+            width: 19px;
+            height: 19px;
+            flex-shrink: 0;
+            color: #764ba2;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .availability-list li svg {
+                transition: transform 0.25s ease, color 0.25s ease;
+            }
+            .availability-list li:hover svg {
+                transform: scale(1.12);
+                color: #f093fb;
+            }
+        }
+
+        /* ---------- "Who I Am" socials (replaces stat credentials) ---------- */
+        .about-socials {
+            flex-wrap: wrap;
+        }
+
+        .credential-link {
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .credential-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .credential-link:hover .credential-icon {
+            background: var(--grad-vibrant);
+            color: #fff;
+        }
+
+        .credential-link .credential-label {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 640px) {
+            .hero-name-gradient { font-size: clamp(2.1rem, 9vw, 3rem); }
+            .hero-role-line { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== SVG ICON SPRITE (hidden) ==================== -->
+    <svg style="display:none" aria-hidden="true">
+        <defs>
+            <symbol id="icon-rocket" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.5-2 5-2 5s3.5-.5 5-2c.8-.8 1.2-2 1-3-1 .2-2.2-.2-3-1-.8-.8-1.2-2-1-3zM12 15l-3-3c1-3 3-7 6.5-9.5C18 0 21 0 21 0s0 3-2.5 6.5C16 10 12 12 12 12l3 3-3 3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="9" r="1.2" fill="currentColor"/></symbol>
+            <symbol id="icon-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-palette" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.3 0-1.1.9-2 2-2h2.3c2.6 0 4.7-2.1 4.7-4.7C22 6 17.5 2 12 2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="10.5" r="1.3" fill="currentColor"/><circle cx="11.5" cy="7" r="1.3" fill="currentColor"/><circle cx="16" cy="9" r="1.3" fill="currentColor"/></symbol>
+            <symbol id="icon-layers" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 12l10 5 10-5M2 17l10 5 10-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-sparkle" viewBox="0 0 24 24"><path d="M12 2l2 6 6 2-6 2-2 6-2-6-6-2 6-2 2-6z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-code" viewBox="0 0 24 24"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-mail" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 6.5l8.5 7 8.5-7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-briefcase" viewBox="0 0 24 24"><rect x="2.5" y="7.5" width="19" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 7.5V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1.5M2.5 13h19" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+            <symbol id="icon-link" viewBox="0 0 24 24"><path d="M9 15l6-6M10 6l1.1-1.1a4 4 0 0 1 5.6 5.6L15.6 11.6M14 18l-1.1 1.1a4 4 0 0 1-5.6-5.6L8.4 12.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-check" viewBox="0 0 24 24"><path d="M4 12.5l5.5 5.5L20 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-star" viewBox="0 0 24 24"><path d="M12 2.5l3 6.5 7 .8-5.2 4.9 1.4 6.9L12 17.8l-6.2 3.8 1.4-6.9L2 9.8l7-.8 3-6.5z" fill="currentColor"/></symbol>
+            <symbol id="icon-git-branch" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="18" cy="9" r="2.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6 8.2V15.8M6 9.5c0 4 3 4.5 6 4.5h2.5M18 11.2v-.2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
+            <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 6.5A1.5 1.5 0 0 1 4.5 5h4.6l1.6 2H19.5A1.5 1.5 0 0 1 21 8.5v9A1.5 1.5 0 0 1 19.5 19h-15A1.5 1.5 0 0 1 3 17.5v-11z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-shield" viewBox="0 0 24 24"><path d="M12 2.5l8 3v6c0 5.5-4 8.5-8 10-4-1.5-8-4.5-8-10v-6l8-3z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M8.5 12l2.3 2.3L15.5 9.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 8.5l-2 5-5 2 2-5 5-2z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-heart" viewBox="0 0 24 24"><path d="M12 20.5s-8-5-8-11.2C4 5.8 6.2 4 8.7 4c1.5 0 2.8.8 3.3 2 .5-1.2 1.8-2 3.3-2 2.5 0 4.7 1.8 4.7 5.3 0 6.2-8 11.2-8 11.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-chevron-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-chevron-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h13l-3 4 3 4H5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-github" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.5 2.87 8.32 6.84 9.67.5.1.68-.22.68-.49 0-.24-.01-1.05-.01-1.9-2.78.62-3.37-1.22-3.37-1.22-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.9 1.57 2.36 1.12 2.93.85.09-.66.34-1.12.62-1.37-2.22-.26-4.56-1.13-4.56-5.04 0-1.11.39-2.02 1.03-2.73-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.04a9.3 9.3 0 0 1 5.01 0c1.91-1.31 2.75-1.04 2.75-1.04.55 1.43.2 2.49.1 2.75.64.71 1.03 1.62 1.03 2.73 0 3.92-2.35 4.78-4.58 5.03.36.32.68.93.68 1.88 0 1.36-.01 2.45-.01 2.79 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2z" fill="currentColor"/></symbol>
+            <symbol id="icon-linkedin" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7.5 10v6.5M7.5 7.3v.2M11.5 16.5V10M11.5 12.5c0-1.4 1-2.5 2.5-2.5s2.5 1.1 2.5 2.5v4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+            <symbol id="icon-instagram" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor"/></symbol>
+        </defs>
+    </svg>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <a href="index.html"><span class="logo-text">MH</span></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="pages/about.html">About</a></li>
+                    <li><a href="pages/projects.html">Projects</a></li>
+                    <li><a href="pages/contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-modern">
+        <div class="hero-background">
+            <div class="hero-decoration hero-decoration-1"></div>
+            <div class="hero-decoration hero-decoration-2"></div>
+            <div class="hero-decoration hero-decoration-3"></div>
+            <div class="hero-grain"></div>
+        </div>
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-left">
+                    <h1 class="hero-title-modern">
+                        <span class="hero-name-gradient">Mohamed Hafis</span>
+                        <span class="title-line title-line-dark hero-role-line">Web Developer &amp; UI/UX Designer</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Frontend Developer &amp; Designer building clean, responsive, and user-friendly websites.
+                        Specializing in modern web applications with focus on user experience and performance.
+                    </p>
+
+                    <div class="hero-stats-modern" id="heroStats">
+                        <div class="stat-modern">
+                            <div class="stat-number-large">1+</div>
+                            <div class="stat-label-large">Years Experience</div>
+                        </div>
+                        <div class="stat-modern">
+                            <div class="stat-number-large">10+</div>
+                            <div class="stat-label-large">Projects Completed</div>
+                        </div>
+                        <div class="stat-modern">
+                            <div class="stat-number-large">100%</div>
+                            <div class="stat-label-large">Client Satisfaction</div>
+                        </div>
+                    </div>
+
+                    <div class="hero-buttons-modern">
+                        <a href="#contact-section" class="btn-modern btn-primary-modern">
+                            <svg class="btn-icon-svg"><use href="#icon-rocket"></use></svg> Start a Project
+                        </a>
+                        <a href="pages/projects.html" class="btn-modern btn-secondary-modern">
+                            View Work <svg class="btn-icon-svg"><use href="#icon-arrow-right"></use></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="hero-image-wrapper">
+                        <div class="hero-gradient-box" aria-hidden="true">
+                            <div class="gradient-box-mesh"></div>
+                            <img src="assets/images/my pics.jpg" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">                       </div>
+                        <div class="image-decoration image-deco-1"></div>
+                        <div class="image-decoration image-deco-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Preview Section -->
+    <section class="about-preview">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-intro-col">
+                    <span class="eyebrow"><svg class="eyebrow-icon"><use href="#icon-compass"></use></svg> Who I Am</span>
+                    <h2>Building thoughtful digital experiences</h2>
+                    <p class="about-lead">I'm Mohamed Hafis, a Frontend Developer &amp; UI/UX Designer with 1+ years of professional experience designing and building products end to end.</p>
+                    <p>I craft responsive, user-friendly web experiences that solve real problems and hold up under real use. My approach blends modern frontend engineering with deliberate interface design — from first wireframe to production-ready code — and I take the same care with what's under the hood as with what's on screen.</p>
+                    <p>Every engagement is built on clean, maintainable code, considered interaction design, and direct communication, so the result is something a client can rely on long after launch.</p>
+
+                    <div class="about-credentials about-socials">
+                        <a href="https://github.com/mdhafiss123-git" target="_blank" class="credential credential-link">
+                            <div class="credential-icon"><svg><use href="#icon-github"></use></svg></div>
+                            <span class="credential-label">mdhafiss123-git</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/mohamed-hafis-812395358/" target="_blank" class="credential credential-link">
+                            <div class="credential-icon"><svg><use href="#icon-linkedin"></use></svg></div>
+                            <span class="credential-label">mohamed-hafis</span>
+                        </a>
+                        <a href="https://www.instagram.com/_hafis_h_" target="_blank" class="credential credential-link">
+                            <div class="credential-icon"><svg><use href="#icon-instagram"></use></svg></div>
+                            <span class="credential-label">_hafis_h_</span>
+                        </a>
+                    </div>
+
+                    <a href="pages/about.html" class="link-arrow">Learn More About Me <svg class="link-arrow-icon"><use href="#icon-arrow-right"></use></svg></a>
+                </div>
+
+                <div class="about-skills-col">
+                    <div class="skills-panel">
+                        <span class="skills-panel-label"><svg class="skills-panel-icon"><use href="#icon-code"></use></svg> Technical Skills</span>
+                        <ul class="skills-list">
+                            <li class="skills-list-item">
+                                <div class="skills-list-row">
+                                    <span class="skills-list-name">JavaScript</span>
+                                    <span class="skills-list-percent">90%</span>
+                                </div>
+                                <div class="skills-list-bar"><span style="width:90%"></span></div>
+                            </li>
+                            <li class="skills-list-item">
+                                <div class="skills-list-row">
+                                    <span class="skills-list-name">React</span>
+                                    <span class="skills-list-percent">85%</span>
+                                </div>
+                                <div class="skills-list-bar"><span style="width:85%"></span></div>
+                            </li>
+                            <li class="skills-list-item">
+                                <div class="skills-list-row">
+                                    <span class="skills-list-name">UI/UX Design</span>
+                                    <span class="skills-list-percent">88%</span>
+                                </div>
+                                <div class="skills-list-bar"><span style="width:88%"></span></div>
+                            </li>
+                            <li class="skills-list-item">
+                                <div class="skills-list-row">
+                                    <span class="skills-list-name">Node.js</span>
+                                    <span class="skills-list-percent">78%</span>
+                                </div>
+                                <div class="skills-list-bar"><span style="width:78%"></span></div>
+                            </li>
+                            <li class="skills-list-item">
+                                <div class="skills-list-row">
+                                    <span class="skills-list-name">MongoDB</span>
+                                    <span class="skills-list-percent">75%</span>
+                                </div>
+                                <div class="skills-list-bar"><span style="width:75%"></span></div>
+                            </li>
+                            <li class="skills-list-item">
+                                <div class="skills-list-row">
+                                    <span class="skills-list-name">CSS3 / Sass</span>
+                                    <span class="skills-list-percent">92%</span>
+                                </div>
+                                <div class="skills-list-bar"><span style="width:92%"></span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section class="philosophy">
+        <div class="container">
+            <div class="philosophy-content">
+                <h2 class="philosophy-quote">"Building the future, one clean line of code at a time"</h2>
+                <p class="philosophy-subtext">Every project is an opportunity to create something meaningful that impacts users positively and drives business results.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Activity Section -->
+    <section class="github-activity">
+        <div class="container">
+            <h2 class="section-title">Open Source &amp; GitHub</h2>
+            <div class="github-grid">
+                <div class="github-card">
+                    <div class="github-card-icon"><svg><use href="#icon-git-branch"></use></svg></div>
+                    <div class="github-stat-number">50+</div>
+                    <div class="github-stat-label">Contributions</div>
+                    <p>Active contributor to open source projects</p>
+                </div>
+                <div class="github-card">
+                    <div class="github-card-icon"><svg><use href="#icon-folder"></use></svg></div>
+                    <div class="github-stat-number">15+</div>
+                    <div class="github-stat-label">Repositories</div>
+                    <p>Well-documented projects for community</p>
+                </div>
+                <div class="github-card">
+                    <div class="github-card-icon"><svg><use href="#icon-shield"></use></svg></div>
+                    <div class="github-stat-number">100%</div>
+                    <div class="github-stat-label">Code Quality</div>
+                    <p>Clean &amp; maintainable code standards</p>
+                </div>
+            </div>
+            <div class="github-cta">
+                <a href="https://github.com/mdhafiss123-git" target="_blank" class="btn btn-primary">Visit GitHub Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section class="expertise">
+        <div class="container">
+            <h2 class="section-title">What I Do</h2>
+            <p class="section-subtitle">Drag, scroll, or use the arrows to explore</p>
+
+            <div class="expertise-slider-wrap">
+                <button class="slider-arrow slider-arrow-left" id="expertisePrev" aria-label="Previous">
+                    <svg><use href="#icon-chevron-left"></use></svg>
+                </button>
+
+                <div class="expertise-grid" id="expertiseSlider">
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><svg><use href="#icon-palette"></use></svg></div>
+                        <h3>Frontend Development</h3>
+                        <p>Building responsive, performant web applications with React, HTML5, CSS3, and JavaScript. Specializing in component-based architecture and modern web standards.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                            <span class="tag">JavaScript ES6+</span>
+                        </div>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><svg><use href="#icon-layers"></use></svg></div>
+                        <h3>UI/UX Design</h3>
+                        <p>Designing beautiful, intuitive user interfaces and experiences. Creating design systems, wireframes, prototypes, and interactive mockups that delight users.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Figma</span>
+                            <span class="tag">Adobe XD</span>
+                            <span class="tag">Prototyping</span>
+                            <span class="tag">Design Systems</span>
+                        </div>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><svg><use href="#icon-bolt"></use></svg></div>
+                        <h3>Full-Stack Development</h3>
+                        <p>Complete end-to-end web solutions from database design to API development to deployment. Building scalable backend systems with Node.js and modern frameworks.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Node.js</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">Express</span>
+                            <span class="tag">REST APIs</span>
+                        </div>
+                    </div>
+                    <div class="expertise-card">
+                        <div class="expertise-icon"><svg><use href="#icon-sparkle"></use></svg></div>
+                        <h3>Interaction Design</h3>
+                        <p>Creating smooth, engaging animations and micro-interactions that enhance user experience. Building delightful digital experiences with thoughtful animations.</p>
+                        <div class="expertise-tags">
+                            <span class="tag">Animations</span>
+                            <span class="tag">User Engagement</span>
+                            <span class="tag">Motion Design</span>
+                            <span class="tag">GSAP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="slider-arrow slider-arrow-right" id="expertiseNext" aria-label="Next">
+                    <svg><use href="#icon-chevron-right"></use></svg>
+                </button>
+            </div>
+            <div class="slider-dots" id="expertiseDots"></div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack">
+        <div class="container">
+            <span class="tech-eyebrow">// stack.config</span>
+            <h2 class="tech-stack-title">Powered by Innovation</h2>
+            <div class="tech-stack-grid">
+                <div class="tech-category">
+                    <h4><span class="tech-cat-index">01</span>Languages</h4>
+                    <div class="tech-items">
+                        <span class="tech-item">JavaScript</span>
+                        <span class="tech-item">HTML</span>
+                        <span class="tech-item">CSS</span>
+                        <span class="tech-item">Python</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4><span class="tech-cat-index">02</span>Frontend</h4>
+                    <div class="tech-items">
+                        <span class="tech-item">React</span>
+                        <span class="tech-item">HTML5</span>
+                        <span class="tech-item">CSS3</span>
+                        <span class="tech-item">Figma</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4><span class="tech-cat-index">03</span>Backend</h4>
+                    <div class="tech-items">
+                        <span class="tech-item">Node.js</span>
+                        <span class="tech-item">Express</span>
+                        <span class="tech-item">MongoDB</span>
+                        <span class="tech-item">Firebase</span>
+                    </div>
+                </div>
+                <div class="tech-category">
+                    <h4><span class="tech-cat-index">04</span>Tools</h4>
+                    <div class="tech-items">
+                        <span class="tech-item">Git/GitHub</span>
+                        <span class="tech-item">VS Code</span>
+                        <span class="tech-item">Docker</span>
+                        <span class="tech-item">Webpack</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section class="featured-projects">
+        <div class="container">
+            <h2 class="section-title">Featured Work</h2>
+            <div class="featured-intro">
+                <p>Showcase of my best projects and recent work</p>
+            </div>
+            <div class="projects-list">
+                <div class="project-row">
+                    <div class="project-icon" aria-hidden="true"><svg><use href="#icon-briefcase"></use></svg></div>
+                    <div class="project-row-content">
+                        <div class="project-row-head">
+                            <h3>E-Commerce Platform</h3>
+                            <span class="project-status">Featured</span>
+                        </div>
+                        <p>Modern e-commerce platform with cart, authentication, and Stripe checkout.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Stripe</span>
+                        </div>
+                    </div>
+                    <a href="pages/projects.html" class="link-arrow">View Project</a>
+                </div>
+
+                <div class="project-row">
+                    <div class="project-icon" aria-hidden="true"><svg><use href="#icon-check"></use></svg></div>
+                    <div class="project-row-content">
+                        <div class="project-row-head">
+                            <h3>Task Management App</h3>
+                            <span class="project-status">Active</span>
+                        </div>
+                        <p>Responsive task management app with real-time updates and progress tracking.</p>
+                        <div class="project-tags">
+                            <span class="tag">React</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                    </div>
+                    <a href="pages/projects.html" class="link-arrow">View Project</a>
+                </div>
+
+                <div class="project-row">
+                    <div class="project-icon" aria-hidden="true"><svg><use href="#icon-layers"></use></svg></div>
+                    <div class="project-row-content">
+                        <div class="project-row-head">
+                            <h3>Professional Portfolio</h3>
+                            <span class="project-status">Live</span>
+                        </div>
+                        <p>Responsive personal portfolio site with refined animations and dark mode support.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML5</span>
+                            <span class="tag">CSS3</span>
+                        </div>
+                    </div>
+                    <a href="pages/projects.html" class="link-arrow">View Project</a>
+                </div>
+            </div>
+            <div class="view-all">
+                <a href="pages/projects.html" class="btn btn-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section class="journey">
+        <div class="container">
+            <h2 class="section-title">My Journey So Far</h2>
+            <div class="journey-timeline">
+                <div class="journey-item" style="--journey-color:#667eea;">
+                    <div class="journey-marker">
+                        <svg><use href="#icon-flag"></use></svg>
+                    </div>
+                    <div class="journey-year">2024</div>
+                    <div class="journey-content">
+                        <h4>Started Programming Journey</h4>
+                        <p>Discovered passion for web development and began learning programming fundamentals, web technologies, and design principles.</p>
+                    </div>
+                </div>
+                <div class="journey-item" style="--journey-color:#f093fb;">
+                    <div class="journey-marker">
+                        <svg><use href="#icon-code"></use></svg>
+                    </div>
+                    <div class="journey-year">2024 - 2025</div>
+                    <div class="journey-content">
+                        <h4>Learning &amp; Building</h4>
+                        <p>Completed comprehensive courses in web development, including HTML, CSS, JavaScript, React, and Node.js. Built personal projects to strengthen skills.</p>
+                    </div>
+                </div>
+                <div class="journey-item" style="--journey-color:#4ade80;">
+                    <div class="journey-marker">
+                        <svg><use href="#icon-briefcase"></use></svg>
+                    </div>
+                    <div class="journey-year">2025 - Present</div>
+                    <div class="journey-content">
+                        <h4>Freelance Developer &amp; Designer</h4>
+                        <p>Building web applications and websites for various clients. Specializing in frontend development with React and full-stack solutions using Node.js and MongoDB.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Section -->
+    <section class="studio">
+        <div class="studio-bg-graphic" aria-hidden="true"></div>
+        <div class="container">
+            <div class="studio-header">
+                <span class="eyebrow eyebrow-light">Status: Open</span>
+                <h2 class="studio-title-display">Available for Work</h2>
+                <p class="studio-subtitle">Ready to collaborate on your next project</p>
+            </div>
+            <div class="studio-content">
+                <div class="studio-text">
+                    <h3 class="studio-heading-display">Let's Build Something Amazing</h3>
+                    <p>I'm currently accepting projects and collaborations. Whether you need a complete web application, UI/UX design, or frontend development, I'm ready to bring your vision to life.</p>
+                    <p>With a focus on quality, communication, and user experience, I ensure every project exceeds expectations.</p>
+                    <div class="studio-services">
+                        <div class="service-item">
+                            <span class="service-check"><svg><use href="#icon-check"></use></svg></span>
+                            <span>Web Development &amp; Design</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-check"><svg><use href="#icon-check"></use></svg></span>
+                            <span>UI/UX Design Systems</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-check"><svg><use href="#icon-check"></use></svg></span>
+                            <span>Full-Stack Solutions</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-check"><svg><use href="#icon-check"></use></svg></span>
+                            <span>Responsive Web Apps</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="studio-stats">
+                    <div class="studio-stat">
+                        <div class="stat-number">1+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="studio-stat">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Projects Delivered</div>
+                    </div>
+                    <div class="studio-stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                    </div>
+                    <div class="studio-stat">
+                        <div class="stat-number">24h</div>
+                        <div class="stat-label">Avg Response Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">What I Offer</h2>
+            <p class="section-subtitle">Swipe through the services I provide</p>
+
+            <div class="services-carousel-wrap">
+                <button class="slider-arrow slider-arrow-left" id="servicesPrev" aria-label="Previous">
+                    <svg><use href="#icon-chevron-left"></use></svg>
+                </button>
+
+                <div class="services-grid" id="servicesSlider">
+                    <div class="service-card">
+                        <div class="service-icon"><svg><use href="#icon-code"></use></svg></div>
+                        <h3>Web Development</h3>
+                        <p>Building responsive, fast, and scalable web applications using modern technologies and best practices.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><svg><use href="#icon-palette"></use></svg></div>
+                        <h3>UI/UX Design</h3>
+                        <p>Creating intuitive user interfaces and experiences that are both beautiful and functional.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><svg><use href="#icon-bolt"></use></svg></div>
+                        <h3>Full-Stack Development</h3>
+                        <p>Complete web solution development from frontend design to backend architecture and deployment.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-icon"><svg><use href="#icon-sparkle"></use></svg></div>
+                        <h3>Interaction Design</h3>
+                        <p>Designing smooth, engaging interactions and animations that enhance user experience.</p>
+                    </div>
+                </div>
+
+                <button class="slider-arrow slider-arrow-right" id="servicesNext" aria-label="Next">
+                    <svg><use href="#icon-chevron-right"></use></svg>
+                </button>
+            </div>
+            <div class="slider-dots" id="servicesDots"></div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials testimonials-compact">
+        <div class="container">
+            <h2 class="section-title">What Clients Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg>
+                    </div>
+                    <p class="testimonial-text">"Mohamed delivered an exceptional website that exceeded all expectations. The attention to detail in both design and code quality was outstanding."</p>
+                    <div class="testimonial-author">
+                        <div class="author-name">Karthick</div>
+                        <div class="author-role">Web Development Project</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg>
+                    </div>
+                    <p class="testimonial-text">"Best frontend developer I've worked with! Clean code, pixel-perfect designs, and always available for revisions."</p>
+                    <div class="testimonial-author">
+                        <div class="author-name">Alex Chen</div>
+                        <div class="author-role">Repeat Client</div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">
+                        <svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg><svg><use href="#icon-star"></use></svg>
+                    </div>
+                    <p class="testimonial-text">"The branding and design work Mohamed produced for our startup was world-class. Fast turnaround and great communication."</p>
+                    <div class="testimonial-author">
+                        <div class="author-name">Emma Rodriguez</div>
+                        <div class="author-role">Startup Founder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Contact Section -->
+    <section id="contact-section" class="contact-professional">
+        <div class="container">
+            <div class="contact-header">
+                <span class="eyebrow">Get In Touch</span>
+                <h2>Let's Create Something Extraordinary</h2>
+                <p>Ready to start your next project? I'm here to help transform your ideas into reality.</p>
+            </div>
+
+            <div class="contact-grid-professional">
+                <!-- Contact Form -->
+                <div class="contact-form-box">
+                    <h3>Send a Message</h3>
+                    <form id="contactFormHome" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell me about your project..." rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">Send Message</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info-box">
+                    <h3>Get in Touch Directly</h3>
+
+                    <div class="contact-method">
+                        <span class="contact-method-label"><svg class="contact-method-icon"><use href="#icon-mail"></use></svg> Email</span>
+                        <p class="contact-method-value"><a href="mailto:mdhafiss123@gmail.com">mdhafiss123@gmail.com</a></p>
+                        <span class="contact-method-meta">Typical response: 24 hours</span>
+                    </div>
+
+                    <div class="contact-method">
+                        <span class="contact-method-label"><svg class="contact-method-icon"><use href="#icon-briefcase"></use></svg> Available For</span>
+                        <ul class="availability-list">
+                            <li><svg><use href="#icon-code"></use></svg> Web Development</li>
+                            <li><svg><use href="#icon-palette"></use></svg> UI/UX Design</li>
+                            <li><svg><use href="#icon-layers"></use></svg> Full-Stack Projects</li>
+                            <li><svg><use href="#icon-briefcase"></use></svg> Freelance Work</li>
+                        </ul>
+                    </div>
+
+                    <div class="contact-method">
+                        <span class="contact-method-label"><svg class="contact-method-icon"><use href="#icon-link"></use></svg> Connect on Social</span>
+                        <div class="social-icons">
+                            <a href="https://github.com/mdhafiss123-git" target="_blank" class="social-icon">GitHub</a>
+                            <a href="https://www.linkedin.com/in/mdhafiss123" target="_blank" class="social-icon">LinkedIn</a>
+                            <a href="https://www.instagram.com/mdhafiss123" target="_blank" class="social-icon">Instagram</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-stats">
+                        <div class="stat-item">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-text">Client Satisfaction</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">24h</div>
+                            <div class="stat-text">Response Time</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value">10+</div>
+                            <div class="stat-text">Projects Done</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-benefits">
+                <div class="benefit">
+                    <div class="benefit-icon"><svg><use href="#icon-check"></use></svg></div>
+                    <div class="benefit-text">
+                        <h4>Free Consultation</h4>
+                        <p>Get free advice on your project scope and requirements</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon"><svg><use href="#icon-sparkle"></use></svg></div>
+                    <div class="benefit-text">
+                        <h4>Custom Solutions</h4>
+                        <p>Tailored solutions designed specifically for your needs</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon"><svg><use href="#icon-shield"></use></svg></div>
+                    <div class="benefit-text">
+                        <h4>Ongoing Support</h4>
+                        <p>Continuous support and maintenance after project completion</p>
+                    </div>
+                </div>
+                <div class="benefit">
+                    <div class="benefit-icon"><svg><use href="#icon-bolt"></use></svg></div>
+                    <div class="benefit-text">
+                        <h4>Flexible Terms</h4>
+                        <p>Flexible pricing options tailored to your budget</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mohamed Hafis</h3>
+                    <p>Web Developer & UI/UX Designer</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="pages/about.html">About</a></li>
+                        <li><a href="pages/projects.html">Projects</a></li>
+                        <li><a href="pages/contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/mdhafiss123-git" target="_blank">GitHub</a>
+                        <a href="https://www.linkedin.com/in/mdhafiss123" target="_blank">LinkedIn</a>
+                        <a href="https://www.instagram.com/_hafis_h_" target="_blank">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mohamed Hafis. All rights reserved.</p>
+                <p>Handcrafted with care and clean code.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

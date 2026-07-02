@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Mohamed Hafis</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ============================================================
+         ABOUT PAGE — VISUAL REFRESH
+         Design tokens: indigo #667eea / violet #764ba2 / pink #f093fb
+         Display: Syne (geometric headings) + Playfair Display (one
+         editorial accent line) · Body: Inter
+         Signature element: the "gradient spine" — a single connecting
+         line motif that threads through the timeline marker, the
+         skill-card top edge, and the journey rail. It's the visual
+         thread that ties Home → About → Projects → Contact together.
+         All new rules are scoped under .mh-about so they layer safely
+         on top of the existing stylesheet without fighting it.
+         ============================================================ -->
+    <style>
+        .mh-about {
+            --ink: #1b1530;
+            --muted: #5b5470;
+            --indigo: #667eea;
+            --violet: #764ba2;
+            --pink: #f093fb;
+            --spine: linear-gradient(135deg, var(--indigo), var(--violet), var(--pink));
+            --paper: #fafaff;
+            --line: rgba(118, 75, 162, 0.16);
+        }
+
+        .mh-about * { box-sizing: border-box; }
+
+        /* ---------- Intro / gradient typography ---------- */
+        .mh-about .about-content { background: var(--paper); padding: 6rem 0 4rem; }
+
+        .mh-about .about-text h2 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--ink);
+        }
+
+        .mh-about .about-text h2 .grad-word {
+            background: var(--spine);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .mh-about .about-text p {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.08rem;
+            line-height: 1.85;
+            color: var(--muted);
+            max-width: 62ch;
+            margin-bottom: 1.5rem;
+        }
+
+        .mh-about .about-text p .accent {
+            color: var(--ink);
+            font-weight: 600;
+            position: relative;
+        }
+
+        .mh-about .about-text p em.lead-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 600;
+            font-size: 1.18rem;
+            color: var(--violet);
+        }
+
+        .mh-about .about-text h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .mh-about .about-text h3::before {
+            content: '';
+            width: 22px;
+            height: 4px;
+            border-radius: 4px;
+            background: var(--spine);
+            display: inline-block;
+        }
+
+        /* ---------- Stat boxes — refined ---------- */
+        .mh-about .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 2.5rem;
+        }
+
+        .mh-about .stat-box {
+            position: relative;
+            padding: 1.75rem 1.25rem;
+            border-radius: 18px;
+            background: #ffffff;
+            border: 1px solid var(--line);
+            box-shadow: 0 8px 24px -12px rgba(102, 126, 234, 0.25);
+            overflow: hidden;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .mh-about .stat-box::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 3px;
+            background: var(--spine);
+        }
+
+        .mh-about .stat-box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 36px -14px rgba(118, 75, 162, 0.35);
+        }
+
+        .mh-about .stat-box-number {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 2.4rem;
+            background: var(--spine);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            line-height: 1;
+        }
+
+        .mh-about .stat-box-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 0.4rem;
+            font-weight: 500;
+        }
+
+        /* ---------- "My Journey" — milestone cards w/ SVG icons ---------- */
+        .mh-about .journey-rail {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mh-about .journey-card {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 1.1rem;
+            align-items: flex-start;
+            padding: 1.4rem 1.5rem;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #ffffff, #fbfaff);
+            border: 1px solid var(--line);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .mh-about .journey-card:hover {
+            transform: translateX(6px);
+            border-color: rgba(118, 75, 162, 0.4);
+            box-shadow: 0 10px 30px -16px rgba(102, 126, 234, 0.35);
+        }
+
+        .mh-about .journey-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(102,126,234,0.12), rgba(240,147,251,0.12));
+            flex-shrink: 0;
+        }
+
+        .mh-about .journey-icon svg {
+            width: 26px;
+            height: 26px;
+            stroke: var(--violet);
+            fill: none;
+            stroke-width: 1.8;
+        }
+
+        .mh-about .journey-card h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--ink);
+            margin: 0 0 0.15rem;
+        }
+
+        .mh-about .journey-card .journey-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            background: var(--spine);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .mh-about .journey-card p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.96rem;
+            line-height: 1.7;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        /* ---------- Skills — glassmorphism cards ---------- */
+        .mh-about .skills-detailed.skills-enhanced {
+            position: relative;
+            padding: 6rem 0;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(102,126,234,0.16), transparent 45%),
+                radial-gradient(circle at 85% 15%, rgba(240,147,251,0.14), transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(118,75,162,0.12), transparent 45%),
+                #120c22;
+            overflow: hidden;
+        }
+
+        .mh-about .skills-detailed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mh-about .skill-box.skill-card-enhanced {
+            position: relative;
+            padding: 2rem 1.75rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            overflow: hidden;
+        }
+
+        .mh-about .skill-box.skill-card-enhanced::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -40%;
+            width: 80%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(240,147,251,0.25), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .mh-about .skill-box.skill-card-enhanced:hover {
+            transform: translateY(-8px);
+            border-color: rgba(240, 147, 251, 0.45);
+            box-shadow: 0 0 0 1px rgba(118,75,162,0.25), 0 20px 50px -20px rgba(102, 126, 234, 0.55), 0 0 40px -10px rgba(240,147,251,0.35);
+        }
+
+        .mh-about .skill-box.skill-card-enhanced:hover::before {
+            opacity: 1;
+        }
+
+        .mh-about .skill-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            background: var(--spine);
+            position: relative;
+            z-index: 1;
+        }
+
+        .mh-about .skill-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: #ffffff;
+        }
+
+        .mh-about .skill-box.skill-card-enhanced h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 1.1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mh-about .skill-list-enhanced {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mh-about .skill-list-enhanced li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            color: rgba(255, 255, 255, 0.72);
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+        }
+
+        .mh-about .skill-list-enhanced li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--spine);
+            flex-shrink: 0;
+        }
+
+        .mh-about .skill-tag {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.78rem;
+            color: #ffffff;
+            padding: 0.18rem 0.55rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            white-space: nowrap;
+        }
+
+        /* ---------- Experience timeline — sleek rail w/ SVG markers ---------- */
+        .mh-about .experience-timeline {
+            padding: 6rem 0;
+            background: var(--paper);
+        }
+
+        .mh-about .experience-timeline > .container > h2 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+            color: var(--ink);
+            margin-bottom: 3.5rem;
+            text-align: center;
+        }
+
+        .mh-about .timeline {
+            position: relative;
+            max-width: 760px;
+            margin: 0 auto;
+            padding-left: 3rem;
+        }
+
+        .mh-about .timeline::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--indigo), var(--violet), var(--pink));
+            border-radius: 2px;
+        }
+
+        .mh-about .timeline-item {
+            position: relative;
+            padding-bottom: 2.75rem;
+        }
+
+        .mh-about .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .mh-about .timeline-marker {
+            position: absolute;
+            left: -3rem;
+            top: 0;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid transparent;
+            background-image:
+                linear-gradient(#fff, #fff),
+                var(--spine);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px -6px rgba(118, 75, 162, 0.4);
+        }
+
+        .mh-about .timeline-marker::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--spine);
+        }
+
+        .mh-about .timeline-content {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .mh-about .timeline-item:hover .timeline-content {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 36px -18px rgba(102, 126, 234, 0.4);
+        }
+
+        .mh-about .timeline-content h3 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--ink);
+            margin: 0 0 0.3rem;
+        }
+
+        .mh-about .timeline-date {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: var(--spine);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        .mh-about .timeline-content p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        /* ---------- Reduced motion ---------- */
+        @media (prefers-reduced-motion: reduce) {
+            .mh-about * { transition: none !important; }
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 640px) {
+            .mh-about .about-stats { grid-template-columns: 1fr; }
+            .mh-about .journey-card { grid-template-columns: 44px 1fr; padding: 1.1rem; }
+            .mh-about .journey-icon { width: 44px; height: 44px; }
+            .mh-about .journey-icon svg { width: 20px; height: 20px; }
+            .mh-about .timeline { padding-left: 2.4rem; }
+            .mh-about .timeline-marker { left: -2.4rem; width: 32px; height: 32px; }
+        }
+    </style>
+</head>
+<body class="mh-about">
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <a href="../index.html"><span class="logo-text">MH</span></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Hero Section -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About Me</h1>
+            <p>Get to know me better</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-grid-single">
+                <div class="about-text">
+                    <h2>Hi, I'm <span class="grad-word">Mohamed Hafis</span></h2>
+                    <p>I am a passionate <span class="accent">Frontend Developer</span> who enjoys building clean, responsive, and user-friendly websites. I focus on creating modern designs using HTML, CSS, and JavaScript, while continuously learning new technologies to improve my skills.</p>
+
+                    <p>With expertise in <span class="accent">UI/UX design</span>, full-stack development, and interaction design, I help bring ideas to life through elegant and functional web solutions. <em class="lead-quote">Good design isn't just how something looks — it's how it works and feels to use.</em></p>
+
+                    <h3>My Journey</h3>
+
+                    <div class="journey-rail">
+                        <div class="journey-card">
+                            <div class="journey-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <path d="M12 7v5l3 2"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-meta">2024 · The Spark</span>
+                                <h4>Started Programming Journey</h4>
+                                <p>Discovered a passion for web development and began learning programming fundamentals and web technologies from the ground up.</p>
+                            </div>
+                        </div>
+
+                        <div class="journey-card">
+                            <div class="journey-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-meta">2024 – 2025 · Building the Foundation</span>
+                                <h4>Learning Web Development</h4>
+                                <p>Completed comprehensive courses covering HTML, CSS, JavaScript, React, and Node.js — and built personal projects to put every concept into practice.</p>
+                            </div>
+                        </div>
+
+                        <div class="journey-card">
+                            <div class="journey-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 21l6.5-6.5"></path>
+                                    <path d="M9.5 14.5L13 11l3 3-3.5 3.5"></path>
+                                    <path d="M13 11l5-5 3 3-5 5"></path>
+                                    <circle cx="19" cy="5" r="2"></circle>
+                                </svg>
+                            </div>
+                            <div>
+                                <span class="journey-meta">2025 – Present · In Motion</span>
+                                <h4>Freelance Web Developer</h4>
+                                <p>Building web applications and websites for clients, specializing in frontend development with React and full-stack solutions powered by Node.js.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-stats">
+                        <div class="stat-box">
+                            <div class="stat-box-number">1+</div>
+                            <div class="stat-box-label">Years Experience</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-number">10+</div>
+                            <div class="stat-box-label">Projects Completed</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-box-number">5+</div>
+                            <div class="stat-box-label">Happy Clients</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-detailed skills-enhanced">
+        <div class="container">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; background: linear-gradient(135deg, #667eea, #764ba2, #f093fb); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4rem;">Technical Skills &amp; Expertise</h2>
+
+            <div class="skills-detailed-grid">
+                <div class="skill-box skill-card-enhanced">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <h3>Frontend Development</h3>
+                    <ul class="skill-list-enhanced">
+                        <li><span class="skill-tag">HTML5</span> Semantic Markup</li>
+                        <li><span class="skill-tag">CSS3</span> Responsive Design</li>
+                        <li><span class="skill-tag">JavaScript</span> ES6+</li>
+                        <li><span class="skill-tag">React</span> Component Architecture</li>
+                        <li><span class="skill-tag">Animations</span> &amp; Interactions</li>
+                        <li><span class="skill-tag">Performance</span> Optimization</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box skill-card-enhanced">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6-6 6 6M3 12h18M9 21v-9h6v9"></path></svg>
+                    </div>
+                    <h3>Backend Development</h3>
+                    <ul class="skill-list-enhanced">
+                        <li><span class="skill-tag">Node.js</span> &amp; Express</li>
+                        <li><span class="skill-tag">REST</span> API Design</li>
+                        <li><span class="skill-tag">MongoDB</span> &amp; Databases</li>
+                        <li><span class="skill-tag">Security</span> &amp; Auth</li>
+                        <li><span class="skill-tag">Server</span> Configuration</li>
+                        <li><span class="skill-tag">DevOps</span> &amp; Deployment</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box skill-card-enhanced">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4M12 8h.01"></path></svg>
+                    </div>
+                    <h3>Design &amp; UX</h3>
+                    <ul class="skill-list-enhanced">
+                        <li><span class="skill-tag">UI/UX</span> Principles</li>
+                        <li><span class="skill-tag">Figma</span> &amp; Design Tools</li>
+                        <li><span class="skill-tag">Prototyping</span> &amp; Wireframes</li>
+                        <li><span class="skill-tag">User</span> Research</li>
+                        <li><span class="skill-tag">Interaction</span> Design</li>
+                        <li><span class="skill-tag">Design</span> Systems</li>
+                    </ul>
+                </div>
+
+                <div class="skill-box skill-card-enhanced">
+                    <div class="skill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.22 4.22l11.31 11.31M4.22 19.78l11.31-11.31"></path></svg>
+                    </div>
+                    <h3>Tools &amp; Technologies</h3>
+                    <ul class="skill-list-enhanced">
+                        <li><span class="skill-tag">Git</span> &amp; GitHub</li>
+                        <li><span class="skill-tag">VS Code</span> IDE</li>
+                        <li><span class="skill-tag">Firebase</span> Backend</li>
+                        <li><span class="skill-tag">Webpack</span> &amp; Build Tools</li>
+                        <li><span class="skill-tag">Testing</span> Frameworks</li>
+                        <li><span class="skill-tag">Agile</span> Methodologies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="experience-timeline">
+        <div class="container">
+            <h2>Experience &amp; Education</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Freelance Web Developer</h3>
+                        <p class="timeline-date">2025 - Present</p>
+                        <p>Building web applications and websites for various clients. Specializing in frontend development with React and full-stack solutions using Node.js.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Learning Web Development</h3>
+                        <p class="timeline-date">2024 - 2025</p>
+                        <p>Completed comprehensive courses in web development, including HTML, CSS, JavaScript, React, and Node.js. Built personal projects to strengthen skills.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Started Programming Journey</h3>
+                        <p class="timeline-date">2024</p>
+                        <p>Discovered passion for web development and began learning programming fundamentals and web technologies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Let's Work Together</h2>
+            <p>Ready to start your next project? Get in touch and let's create something amazing!</p>
+            <a href="contact.html" class="btn btn-primary">Contact Me</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Mohamed Hafis</h3>
+                    <p>Web Developer & UI/UX Designer</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/mdhafiss123-git" target="_blank">GitHub</a>
+                        <a href="https://www.linkedin.com/in/mdhafiss123" target="_blank">LinkedIn</a>
+                        <a href="https://www.instagram.com/mdhafiss123" target="_blank">Instagram</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Mohamed Hafis. All rights reserved.</p>
+                <p>Handcrafted with ❤️ and clean code.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
